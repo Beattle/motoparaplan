@@ -1,0 +1,98 @@
+/* menu */
+#menu {
+	margin-top:0px;
+	margin-bottom:0px;
+	width:1049px;
+	margin:0 auto;
+	margin-bottom:10px;
+	border-top:0px;
+	border-radius:0px;
+	height:50px;
+	
+}
+#menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	
+}
+#menu > ul > li {
+	position: relative;
+	float: left;
+	z-index: 20;
+	padding: 0px;
+	max-width:125px;
+	text-align:center;
+}
+#menu > ul > li:first-child{
+	height:55px;
+}
+
+#menu > ul > li:nth-child(6) {
+	max-width:180px;
+}
+
+
+@-moz-document url-prefix() {  
+#menu > ul > li {max-width:128px;} 
+}
+
+#menu > ul > li > a {
+	font-size: 14px;
+	color: #535353;
+	line-height: 14px;
+	text-decoration: none;
+	display: block;
+	padding: 15px 10px 5px 10px;
+	margin-bottom: 5px;
+	z-index: 6;
+	position: relative;
+	border:1px solid #dddddd;
+border-collapse: collapse;
+background:#eeeeee;
+text-transform:uppercase;
+font-weight:bold;
+height:40px;
+vertical-align:middle!important;
+}
+
+#menu > ul > li > a:nth-child() {
+}
+
+#menu > ul > li:hover > a {
+	background: #3498DB;
+	color:#FFF;
+}
+#menu > ul > li > div {
+	display: none;
+	background: #FFFFFF;
+	position: absolute;
+	z-index: 500000000000!important;
+	padding: 5px;
+	border: 1px solid #000000;
+	background: url('../image/menu.png');
+	margin-top:-5px;
+}
+#menu > ul > li:hover > div {
+	display: table;
+}
+#menu > ul > li > div > ul {
+	display: table-cell;
+}
+#menu > ul > li ul + ul {
+	padding-left: 20px;
+}
+#menu > ul > li ul > li > a {
+	text-decoration: none;
+	padding: 4px;
+	color: #FFFFFF;
+	display: block;
+	white-space: nowrap;
+	min-width: 120px;
+}
+#menu > ul > li ul > li > a:hover {
+	background: #000000;
+}
+#menu > ul > li > div > ul > li > a {
+	color: #FFFFFF;
+}
