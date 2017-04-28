@@ -4,7 +4,7 @@
 
 <?php if ($news) { ?>
 <?php if($box) { ?>
-	<div class="box news-cont">
+	<div class="box news">
 		<div class="box-heading">
 			<?php if($icon) { ?>
 				<div style="float: left; margin-right: 8px;"><img src="catalog/view/theme/default/image/message.png" alt="" /></div>
@@ -12,14 +12,11 @@
 			<?php if($customtitle) { ?>
 				<?php echo $customtitle; ?>
 			<?php } ?>
-			
-<!--			<a href="http://motoparaplan.ru/index.php?route=information/news" class="all-news">Все новости</a>-->
+
 		</div>
 		<div class="box-content">
 		<?php foreach ($news as $news_story) { ?>
 			<div class="box-news">
-
-	
 				<p><a class="newsimage" href="<?php echo $news_story['href']; ?>"><?php if ($news_story['thumb']) { ?><img  src="<?php echo $news_story['thumb']; ?>"><?php } ?></a>
 				
 				<?php if ($show_headline) { ?>
@@ -37,17 +34,15 @@
 			
 			
 		<?php } ?>
-		<?php if($showbutton) { ?>
-			<div style="text-align:right;">
-				<a href="<?php echo $newslist; ?>" class="button"><span><?php echo $buttonlist; ?></span></a>
-			</div>
-		<?php } ?>
-		
-		
-		
+
 		<div style="clear:both;"></div>
-		
+            <?php if($showbutton) { ?>
+                <div class="btn-cont">
+                    <a href="<?php echo $newslist; ?>" class="button"><span><?php echo $buttonlist; ?></span></a>
+                </div>
+            <?php } ?>
 		</div>
+
 	</div>
 <?php } else { ?>
 	<div style="margin-bottom:10px;">

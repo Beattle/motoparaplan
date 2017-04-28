@@ -632,16 +632,20 @@ label{
 .main-menu li{
 	float:         left;
 	line-height:   16px;
-	padding-right: 2px;
+	margin-right: 2px;
+	color:#fff;
+	padding:         15px 10px 10px;
+	font-size: 18px;
+	text-transform: lowercase;
 }
 .main-menu li:nth-child(3){
 	margin-left: 10px;
 }
 .main-menu li a{
-	color:           #fff;
+	color: #fff;
 	display:         block;
 	font-size:       18px;
-	padding:         15px 10px 10px;
+
 	text-decoration: none;
 	text-transform:  lowercase;
 	font-weight:     normal;
@@ -1477,6 +1481,11 @@ a.button:hover span{
 	background:    #F4F5F5;
 	border-bottom: 1px solid #F4F5F5;
 }
+
+.box.news .box-content{
+	padding-left: 12px;
+}
+
 .box .box-content{
 	padding:       10px 0 0;
 	background:    #f5f3f4;
@@ -2405,13 +2414,16 @@ ul{
 	border-radius:  5px;
 	display:        inline-block;
 	margin-left:    20px;
+	margin-bottom: 15px;
 }
-.product-grid > div:nth-child(4n){
-	margin-right: 0 !important;
+
+/*.product-grid > div:nth-child(4n){
+	margin-left: 0 !important;
 }
 .product-grid > div:last-child{
 	margin-right: 0 !important;
-}
+}*/
+
 .product-grid > div:hover{
 }
 .extra-prod input{
@@ -2448,7 +2460,7 @@ ul{
 	padding-top:    5px;
 	padding-bottom: 5px;
 	text-align:     center;
-	min-height:     24px;
+	min-height:     36px;
 }
 .product-grid .name a:hover, .product-list .name a:hover{
 	text-decoration: underline;
@@ -5513,4 +5525,10 @@ a.tip:hover{
 .simplecheckout{
 	background: #f8f8f8;
 	padding:    15px 10px;
+}
+
+.box.news .btn-cont{
+	margin-bottom: 10px;
+	text-align: center;
+	margin-top: 10px;
 }

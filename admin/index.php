@@ -11,14 +11,18 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
-// Startup
-require_once(DIR_SYSTEM . 'startup.php');
+//VirtualQMOD
+require_once('../vqmod/vqmod.php');
+VQMod::bootup();
+
+// VQMODDED Startup
+require_once(VQMod::modCheck(DIR_SYSTEM . 'startup.php'));
 
 // Application Classes
-require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/user.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/currency.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/user.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/weight.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/length.php'));
 
 // Registry
 $registry = new Registry();
@@ -145,8 +149,7 @@ $controller->addPreAction(new Action('common/home/login'));
 
 // Permission
 $controller->addPreAction(new Action('common/home/permission'));
-controller->addPreAction(new Action('module/filter/managecache'));
-
+$controller->addPreAction(new Action('module/filter/managecache'));
 // Router
 if (isset($request->get['route'])) {
 	$action = new Action($request->get['route']);

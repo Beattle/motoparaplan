@@ -11,17 +11,23 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
-// Startup
-require_once(DIR_SYSTEM . 'startup.php');
+// VirtualQMOD
+require_once('./vqmod/vqmod.php');
+VQMod::bootup();
+
+
+
+// VQMODDED Startup
+require_once(VQMod::modCheck(DIR_SYSTEM . 'startup.php'));
 
 // Application Classes
-require_once(DIR_SYSTEM . 'library/customer.php');
-require_once(DIR_SYSTEM . 'library/affiliate.php');
-require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/tax.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
-require_once(DIR_SYSTEM . 'library/cart.php');
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/customer.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/affiliate.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/currency.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/tax.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/weight.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/length.php'));
+require_once(VQMod::modCheck(DIR_SYSTEM . 'library/cart.php'));
 
 // Registry
 $registry = new Registry();
@@ -37,6 +43,8 @@ $registry->set('config', $config);
 // Database 
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
+
+
 
 // Store
 if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
@@ -66,6 +74,8 @@ if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
 	$config->set('config_ssl', HTTPS_SERVER);	
 }
+
+
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -118,8 +128,10 @@ $registry->set('request', $request);
 $response = new Response();
 $response->addHeader('Content-Type: text/html; charset=utf-8');
 $response->setCompression($config->get('config_compression'));
-$registry->set('response', $response); 
-		
+$registry->set('response', $response);
+
+
+
 // Cache
 $cache = new Cache();
 $registry->set('cache', $cache); 
@@ -222,9 +234,13 @@ $controller->addPreAction(new Action('common/maintenance'));
 if (!$seo_type = $config->get('config_seo_url_type')) {
 	$seo_type = 'seo_url';
 }
+
+
+
 $controller->addPreAction(new Action('common/' . $seo_type));
-$controller->addPreAction(new Action('module/filter/checkvalidity'));	
-	
+$controller->addPreAction(new Action('module/filter/checkvalidity'));
+
+
 // Router
 if (isset($request->get['route'])) {
 	$action = new Action($request->get['route']);
@@ -235,6 +251,10 @@ if (isset($request->get['route'])) {
 // Dispatch
 $controller->dispatch($action, new Action('error/not_found'));
 
+
+
 // Output
 $response->output();
+
+
 ?>

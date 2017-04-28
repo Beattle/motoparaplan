@@ -14,7 +14,7 @@
   <div class="box">
     <div class="heading">
       <h1><img src="view/image/payment.png" alt="" /> <?php echo $heading_title; ?></h1>
-      <div class="buttons"><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+      <div class="buttons"><a id="update_currency" class="button"><?php echo 'Обновить курсы'; ?></a><a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
     </div>
     <div class="content">
       <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form">
@@ -75,4 +75,20 @@
     </div>
   </div>
 </div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>
+<script type="text/javascript"><!--
+$('#update_currency').bind('click', function(){
+	$.ajax({
+		type: 'POST',
+		url: 'index.php?route=localisation/currency&token=<?php echo $this->session->data['token'] ?>',
+		data: {manual_update:'true'},
+		beforeSend: function() {
+                        $('#update_currency').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+                    },
+		cache: false,
+        success: function(){  
+            location.reload();
+        }
+	});
+});
+//--></script>

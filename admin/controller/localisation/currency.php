@@ -142,7 +142,14 @@ class ControllerLocalisationCurrency extends Controller {
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
+		
+		if (isset($this->request->post['manual_update'])) {
 
+                $this->load->model('localisation/currency');
+				die($this->model_localisation_currency->updateCurrencies());
+
+		}
+		
   		$this->data['breadcrumbs'] = array();
 
    		$this->data['breadcrumbs'][] = array(
@@ -186,7 +193,8 @@ class ControllerLocalisationCurrency extends Controller {
 				'title'         => $result['title'] . (($result['code'] == $this->config->get('config_currency')) ? $this->language->get('text_default') : null),
 				'code'          => $result['code'],
 				'value'         => $result['value'],
-				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
+				//'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])),
+				'date_modified' => date($this->language->get('date_format_short'), strtotime($result['date_modified'])) . ' ' . date($this->language->get('time_format'), strtotime($result['date_modified'])),
 				'selected'      => isset($this->request->post['selected']) && in_array($result['currency_id'], $this->request->post['selected']),
 				'action'        => $action
 			);

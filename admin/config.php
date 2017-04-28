@@ -1,13 +1,13 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://shop.oc-project.ru/planes/admin/');
-define('HTTP_CATALOG', 'http://shop.oc-project.ru/planes/');
-define('HTTP_IMAGE', 'http://shop.oc-project.ru/planes/image/');
+define('HTTP_SERVER', 'http://shop.oc-project.com/planes/admin/');
+define('HTTP_CATALOG', 'http://shop.oc-project.com/planes/');
+define('HTTP_IMAGE', 'http://shop.oc-project.com/planes/image/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://shop.oc-project.ru/planes/admin/');
-define('HTTPS_CATALOG', 'http://shop.oc-project.ru/planes/');
-define('HTTPS_IMAGE', 'http://shop.oc-project.ru/planes/image/');
+define('HTTPS_SERVER', 'http://shop.oc-project.com/planes/admin/');
+define('HTTPS_CATALOG', 'http://shop.oc-project.com/planes/');
+define('HTTPS_IMAGE', 'http://shop.oc-project.com/planes/image/');
 
 // DIR
 define('DIR_APPLICATION', '/srv/hipno/html/test.com/planes/admin/');

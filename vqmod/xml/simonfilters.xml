@@ -1,0 +1,103 @@
+<modification>
+    <id>SimonFilters</id>
+    <version>simonfilters - 2.6.0 Build 0003</version>
+    <vqmver>2.1.1</vqmver>
+    <author>SimonOop http://www.simonoop.com</author>
+
+    <file name="catalog/model/catalog/product.php">
+        <operation>
+            <search position="before"><![CDATA[$cache = md5(http_build_query($data));]]></search>
+            <add><![CDATA[
+                /*
+                * SimonFilters Code START
+                */
+                $this->load->model('catalog/filter');
+                $SimonAttributes = $this->model_catalog_filter->getSimonAttributes();
+                $data['simonfilters']=$this->model_catalog_filter->getSimonAttributesCacheData();
+                /*
+                * SimonFilters Code END
+                */
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[$sql .= " GROUP BY p.product_id";]]></search>
+            <add><![CDATA[
+                        /*
+                        * SimonFilters Code START
+                        */
+                        $sql .= $SimonAttributes['default'];
+                        /*
+                        * SimonFilters Code END
+                        */
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[$sql .= " GROUP BY p.product_id";]]></search>
+            <add><![CDATA[
+                        /*
+                        * SimonFilters Code START
+                        */
+                        $this->model_catalog_filter->debug(__FILE__.';'.__LINE__,'FINAL sql:',$sql);
+                        #echo $sql;
+                        /*
+                        * SimonFilters Code END
+                        */
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after" offset="2"><![CDATA[$sql .= " LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)";]]></search>
+            <add><![CDATA[
+                        /*
+                        * SimonFilters Code START
+                        */
+                        $sql .= " LEFT JOIN " . DB_PREFIX . "product_special ps ON (p.product_id = ps.product_id) ";
+                        /*
+                        * SimonFilters Code END
+                        */
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before" index="3"><![CDATA[$query = $this->db->query($sql);]]></search>
+            <add><![CDATA[
+                /*
+                * SimonFilters Code START
+                */
+                $this->load->model('catalog/filter');
+                $SimonAttributes = $this->model_catalog_filter->getSimonAttributes();
+                $sql .= $SimonAttributes['default'];
+                /*
+                * SimonFilters Code END
+                */
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[$sql .= " WHERE pd.language_id =]]></search>
+            <add><![CDATA[
+                /*
+                * SimonFilters Code START
+                */
+                $this->load->model('catalog/filter');
+                $SimonAttributes = $this->model_catalog_filter->getSimonAttributes();
+                $sql .= $SimonAttributes['options'];
+                /*
+                * SimonFilters Code END
+                */
+            ]]></add>
+        </operation>
+
+    </file>
+
+
+    <!--
+    *
+    * Shoppica 1.0
+    *
+    -->
+    <file name="catalog/controller/module/shoppica.php">
+        <operation error="skip">
+            <search position="replace"><![CDATA[return (bool) $this->getHeader('X-Requested-With') || $this->getHeader('x-requested-with') || (isset($_REQUEST['type']) && $_REQUEST['type'] == 'XMLHttpRequest');]]></search>
+            <add><![CDATA[return  $this->getHeader('X-Requested-With')=='SimonFilters'?(false):((bool)$this->getHeader('X-Requested-With') || $this->getHeader('x-requested-with') || (isset($_REQUEST['type']) && $_REQUEST['type'] == 'XMLHttpRequest'));]]></add>
+        </operation>
+    </file>
+
+</modification>

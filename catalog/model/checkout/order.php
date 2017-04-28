@@ -512,10 +512,13 @@ class ModelCheckoutOrder extends Model {
                 				// $text .= $language->get('text_new_date_added') . ' ' . date($language->get('date_format_short'), strtotime($order_info['date_added'])) . "\n";
                 				$text .= $language->get('text_new_order_status') . ' ' . strip_tags($order_status) . "\n\n";
 
-                				if( !empty($order_info['payment_method']) ) $text .= 'payment method: ' . $order_info['payment_method'] . "\n";
+                				if( !empty($order_info['payment_method']) ) $text .= 'Способ оплаты: ' . $order_info['payment_method'] . "\n";
 				// $text .= 'shipping method: ' . $order_info['shipping_method'] . "\n";
-				if( !empty($order_info['email']) )     $text .= 'email: ' . $order_info['email'] . "\n";
-				if( !empty($order_info['telephone']) ) $text .= 'telephone: ' . $order_info['telephone'] . ", ";
+                if(!empty($order_info['payment_firstname'])) $text.="Имя: $order_info[payment_firstname] \n";
+
+				if( !empty($order_info['email']) )     $text .= 'Почта: ' . $order_info['email'] . "\n";
+				if( !empty($order_info['telephone']) ) $text .= 'Телефон: ' . $order_info['telephone'] . "\n";
+				if(!empty($order_info['payment_address_1'])) $text .="Адрес доставки: $order_info[payment_address_1] \n";
 				$text .= 'IP: http://geoiptool.com/en/?IP=' . $order_info['ip'] . "\n\n";
 				$text .= $language->get('text_new_products') . "\n";
 				
@@ -559,6 +562,7 @@ class ModelCheckoutOrder extends Model {
 					$text .= $language->get('text_new_comment') . "\n\n";
 					$text .= $order_info['comment'] . "\n\n";
 				}
+
 			
 				$mail = new Mail(); 
 				$mail->protocol = $this->config->get('config_mail_protocol');
